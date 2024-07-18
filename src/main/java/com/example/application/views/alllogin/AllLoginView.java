@@ -9,7 +9,7 @@ import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.PermitAll;
 
 @PageTitle("AllLogin")
-@Route(value = "my-view3", layout = MainLayout.class)
+@Route(value = "alllogin", layout = MainLayout.class)
 @PermitAll
 public class AllLoginView extends Composite<VerticalLayout> {
 

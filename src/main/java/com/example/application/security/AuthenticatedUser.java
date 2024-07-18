@@ -1,6 +1,5 @@
 package com.example.application.security;
 
-import com.example.application.data.User;
 import com.example.application.data.UserRepository;
 import com.vaadin.flow.spring.security.AuthenticationContext;
 import java.util.Optional;
@@ -20,9 +19,9 @@ public class AuthenticatedUser {
     }
 
     @Transactional
-    public Optional<User> get() {
-        return authenticationContext.getAuthenticatedUser(UserDetails.class)
-                .map(userDetails -> userRepository.findByUsername(userDetails.getUsername()));
+    public Optional<UserDetails> get() {
+        return authenticationContext.getAuthenticatedUser(UserDetails.class);
+//                .map(userDetails -> userRepository.findByUsername(userDetails.getUsername()));
     }
 
     public void logout() {

@@ -10,6 +10,7 @@ import com.example.application.views.login.LoginView;
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.avatar.Avatar;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.contextmenu.MenuItem;
 import com.vaadin.flow.component.html.Anchor;
 import com.vaadin.flow.component.html.Div;
@@ -41,6 +42,8 @@ import com.vaadin.flow.theme.lumo.LumoUtility.Whitespace;
 import com.vaadin.flow.theme.lumo.LumoUtility.Width;
 import java.io.ByteArrayInputStream;
 import java.util.Optional;
+
+import org.springframework.security.core.userdetails.UserDetails;
 import org.vaadin.lineawesome.LineAwesomeIcon;
 
 /**
@@ -83,10 +86,10 @@ public class MainLayout extends AppLayout {
     private AuthenticatedUser authenticatedUser;
     private AccessAnnotationChecker accessChecker;
 
-    public MainLayout(AuthenticatedUser authenticatedUser, AccessAnnotationChecker accessChecker) {
-        this.authenticatedUser = authenticatedUser;
-        this.accessChecker = accessChecker;
 
+    public MainLayout(AccessAnnotationChecker accessChecker,AuthenticatedUser authenticatedUser) {
+        this.accessChecker=accessChecker;
+        this.authenticatedUser=authenticatedUser;
         addToNavbar(createHeaderContent());
     }
 
@@ -101,34 +104,35 @@ public class MainLayout extends AppLayout {
         appName.addClassNames(Margin.Vertical.MEDIUM, Margin.End.AUTO, FontSize.LARGE);
         layout.add(appName);
 
-        Optional<User> maybeUser = authenticatedUser.get();
+        Optional<UserDetails> maybeUser = authenticatedUser.get();
+
         if (maybeUser.isPresent()) {
-            User user = maybeUser.get();
-
-            Avatar avatar = new Avatar(user.getName());
-            StreamResource resource = new StreamResource("profile-pic",
-                    () -> new ByteArrayInputStream(user.getProfilePicture()));
-            avatar.setImageResource(resource);
-            avatar.setThemeName("xsmall");
-            avatar.getElement().setAttribute("tabindex", "-1");
-
-            MenuBar userMenu = new MenuBar();
-            userMenu.setThemeName("tertiary-inline contrast");
-
-            MenuItem userName = userMenu.addItem("");
-            Div div = new Div();
-            div.add(avatar);
-            div.add(user.getName());
-            div.add(new Icon("lumo", "dropdown"));
-            div.getElement().getStyle().set("display", "flex");
-            div.getElement().getStyle().set("align-items", "center");
-            div.getElement().getStyle().set("gap", "var(--lumo-space-s)");
-            userName.add(div);
-            userName.getSubMenu().addItem("Sign out", e -> {
-                authenticatedUser.logout();
-            });
-
-            layout.add(userMenu);
+//            User user = maybeUser.get();
+//
+//            Avatar avatar = new Avatar(user.getName());
+//            StreamResource resource = new StreamResource("profile-pic",
+//                    () -> new ByteArrayInputStream(user.getProfilePicture()));
+//            avatar.setImageResource(resource);
+//            avatar.setThemeName("xsmall");
+//            avatar.getElement().setAttribute("tabindex", "-1");
+//
+//            MenuBar userMenu = new MenuBar();
+//            userMenu.setThemeName("tertiary-inline contrast");
+//
+//            MenuItem userName = userMenu.addItem("");
+//            Div div = new Div();
+//            div.add(avatar);
+//            div.add(user.getName());
+//            div.add(new Icon("lumo", "dropdown"));
+//            div.getElement().getStyle().set("display", "flex");
+//            div.getElement().getStyle().set("align-items", "center");
+//            div.getElement().getStyle().set("gap", "var(--lumo-space-s)");
+//            userName.add(div);
+//            userName.getSubMenu().addItem("Sign out", e -> {
+//                authenticatedUser.logout();
+//            });
+            var logout = new Button("logout ", buttonClickEvent -> authenticatedUser.logout());
+            layout.add(logout);
         } else {
             Anchor loginLink = new Anchor("login", "Sign in");
             layout.add(loginLink);

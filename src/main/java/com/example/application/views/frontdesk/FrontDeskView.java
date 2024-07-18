@@ -10,8 +10,8 @@ import com.vaadin.flow.router.RouteAlias;
 import jakarta.annotation.security.RolesAllowed;
 
 @PageTitle("FrontDesk")
-@Route(value = "", layout = MainLayout.class)
-@RouteAlias(value = "", layout = MainLayout.class)
+@Route(value = "frontdesk", layout = MainLayout.class)
+//@RouteAlias(value = "", layout = MainLayout.class)
 @RolesAllowed("FRONTDESK")
 public class FrontDeskView extends Composite<VerticalLayout> {
 

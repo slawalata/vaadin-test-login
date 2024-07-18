@@ -46,19 +46,19 @@ public class SecurityConfiguration extends VaadinWebSecurity {
         var alice = User.builder()
                 .username("daniel")
                 // password = password with this hash, don't tell anybody :-)
-                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .password("$2a$10$yD.uqapqW2xkVrEQm8sSE.n7rLeEX/cQs3oDslAvjpVmuWkdgABjG")
                 .roles(Roles.ITADMIN)
                 .build();
         var bob = User.builder()
                 .username("sanga")
                 // password = password with this hash, don't tell anybody :-)
-                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .password("$2a$10$yD.uqapqW2xkVrEQm8sSE.n7rLeEX/cQs3oDslAvjpVmuWkdgABjG")
                 .roles(Roles.FRONTDESK)
                 .build();
         var admin = User.builder()
                 .username("anderias")
                 // password = password with this hash, don't tell anybody :-)
-                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .password("$2a$10$yD.uqapqW2xkVrEQm8sSE.n7rLeEX/cQs3oDslAvjpVmuWkdgABjG")
                 .roles(Roles.ACCOUNTING)
                 .build();
         return new InMemoryUserDetailsManager(alice, bob, admin);

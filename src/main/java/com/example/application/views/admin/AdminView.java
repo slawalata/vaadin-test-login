@@ -9,7 +9,7 @@ import com.vaadin.flow.router.Route;
 import jakarta.annotation.security.RolesAllowed;
 
 @PageTitle("Admin")
-@Route(value = "my-view", layout = MainLayout.class)
+@Route(value = "admin", layout = MainLayout.class)
 @RolesAllowed("ITADMIN")
 public class AdminView extends Composite<VerticalLayout> {
 
