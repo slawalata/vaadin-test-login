@@ -1,4 +1,4 @@
-FROM amazoncorretto:21
+FROM eclipse-temurin:21
 LABEL org.opencontainers.image.authors="sanga.lawalata@gmail.com"
 WORKDIR /app
 COPY target/testLoginApp-example.jar .
