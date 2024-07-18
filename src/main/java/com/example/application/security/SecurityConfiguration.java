@@ -6,8 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
@@ -31,6 +34,34 @@ public class SecurityConfiguration extends VaadinWebSecurity {
 
         super.configure(http);
         setLoginView(http, LoginView.class);
+    }
+
+    /**
+     * Demo UserDetailsManager which only provides two hardcoded
+     * in memory users and their roles.
+     * NOTE: This shouldn't be used in real world applications.
+     */
+    @Bean
+    public UserDetailsManager userDetailsService() {
+        var alice = User.builder()
+                .username("daniel")
+                // password = password with this hash, don't tell anybody :-)
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .roles(Roles.ITADMIN)
+                .build();
+        var bob = User.builder()
+                .username("sanga")
+                // password = password with this hash, don't tell anybody :-)
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .roles(Roles.FRONTDESK)
+                .build();
+        var admin = User.builder()
+                .username("anderias")
+                // password = password with this hash, don't tell anybody :-)
+                .password("{bcrypt}$2a$10$GRLdNijSQMUvl/au9ofL.eDwmoohzzS7.rmNSJZ.0FxO/BTk76klW")
+                .roles(Roles.ACCOUNTING)
+                .build();
+        return new InMemoryUserDetailsManager(alice, bob, admin);
     }
 
 }

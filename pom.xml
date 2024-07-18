@@ -96,6 +96,7 @@
     </dependencies>
 
     <build>
+        <finalName>testLoginApp-example</finalName>
         <defaultGoal>spring-boot:run</defaultGoal>
         <plugins>
             <plugin>
