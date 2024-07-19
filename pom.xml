@@ -136,6 +136,7 @@
                 </dependency>
             </dependencies>
             <build>
+                <finalName>testLoginApp-example</finalName>
                 <plugins>
                     <plugin>
                         <groupId>com.vaadin</groupId>
